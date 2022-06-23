@@ -1,0 +1,29 @@
+<html lang="en">
+  <body style='margin:0; padding:0; background-color:#F2F2F2;'>
+    <p>List of Products</p>
+    {{#if productList }}    
+      <table width='100%', cellspacing='0', cellpadding='0', border='0', bgcolor='#F2F2F2'>
+        <thead>
+            <tr>
+              <th>Title</th>
+              <th>Price</th> 
+              <th>Thumbnail</th>
+            </tr>              
+        </thead>            
+        <tbody>
+          {{#productList}}
+            <tr>
+                <td>{{title}}</td> 
+                <td>{{price}}</td>                
+                <td><img src="{{thumbnail}}"></td>
+            </tr>
+          {{/productList}}
+        </tbody>                
+      </table>
+    {{else}}  
+      <p>No hay Productos</p>
+    {{/if}}
+      
+  </body>
+<input type="button" onclick="window.location.href = 'http://localhost:8080/';" value="Go To Create Product"/>
+</html>

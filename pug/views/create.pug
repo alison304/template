@@ -1,0 +1,60 @@
+doctype html
+<html>
+<div>
+    <form method="POST" id="native_validation">
+        <h1>Productos</h1>
+        <div>
+               <label style="width: 200px">Title</label>
+               <input id="title" type="text" name="title" />
+        </div>
+        <br/>
+        <div>
+               <label style="width: 200px">Price</label>
+               <input id="price" type="text" name="price" />
+        </div>       
+        <br/>       
+        <div>
+               <label style="width: 200px">Thumbnail</label>
+               <input id="thumbnail" type="text" name="thumbnail" />
+        </div>
+        <br/>
+        <div>
+                <button type="submit">Submit</button>
+                <input type="button" onclick="window.location.href = 'http://localhost:8080/productos';" value="Go To Product List"/>
+        </div>        
+    </form>
+</div>
+
+script.
+
+    let form = document.getElementById('native_validation');
+    form.onsubmit = function(e) {
+        e.preventDefault();
+        submit(e);
+    }
+
+    function submit(e) {   
+           let url = "http://localhost:8080/api/productos";
+           let xhr = new XMLHttpRequest();
+           xhr.open("POST", url);
+
+           xhr.setRequestHeader("Accept", "application/json");
+           xhr.setRequestHeader("Content-Type", "application/json");
+
+           xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4) {
+                console.log(xhr.responseText);
+                window.location.href = "http://localhost:8080";
+              }
+           };
+
+           let title = document.getElementById("title").value;
+           let price = document.getElementById("price").value;
+           let thumbnail = document.getElementById("thumbnail").value;
+
+           let data = `{"title": "${title}","price": ${price},"thumbnail": "${thumbnail}"}`;
+
+           xhr.send(data);              
+    }
+
+</html>
